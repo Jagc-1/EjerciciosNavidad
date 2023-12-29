@@ -1,4 +1,5 @@
-import torneo
+import torneo as tn
 
-torneo.iniciar_torneo()
-torneo.mostrar_ganadores(torneo)
+torneo = tn.register_player()
+tn.start_tournament(torneo)
+tn.get_winners(torneo)
