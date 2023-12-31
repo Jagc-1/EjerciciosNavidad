@@ -1,15 +1,6 @@
 import os
 def points_in_favor(player):
-    return player.get("PA",0)
-
-def register_match(player, win, points):
-    player["PJ"] += 1
-    if win:
-        player["PG"] += 2
-    else:
-        player["PP"] += 1
-    player["PA"] += points
-
+    return player.get("PA")
 def register_player():
     max_players = 12
     total_players = 0
@@ -59,7 +50,7 @@ def register_player():
                 continue
 
             if info["min_edad"] <= age <= info["max_edad"]:
-                player = {"nombre": name, "edad": age}
+                player = {"nombre": name, "edad": age,"PJ": 0, "PG": 0, "PP": 0, "PA": 0}
                 info["jugadores"].append(player)
                 total_players += 1
                 print(f"{name} registrado exitosamente.")
@@ -71,8 +62,9 @@ def register_player():
     os.system('pause')
     return players_by_categories
 
-def start_tournament(players_by_categories: dict):
+def registrer_points(players_by_categories: dict) -> dict:
     name_player = input("Ingrese nombre del jugador: ")
+    os.system('pause')
     for category, info in players_by_categories.items():
         for player in info["jugadores"]:
             if name_player == player["nombre"]:
@@ -81,20 +73,37 @@ def start_tournament(players_by_categories: dict):
                 while True:
                     try:
                         win = input("¿El jugador ganó el partido? (S/N): ").lower()
-                        if win in ('s', 'n'):
+                        if win == 's':
+                            player["PG"] += 1
+                            player["PJ"] += 1
                             points = int(input("Ingrese la cantidad de puntos a favor del jugador: "))
-                            break
+                            player["PA"] += points
+                        else:
+                            player["PP"] += 1
+                            player["PJ"] += 1
+                        break
                     except ValueError:
                         print("Por favor, ingrese datos válidos.")
-
-
-                register_match(player, win, points)
+                print("Puntos actualizados:")
+                print(player)
+                os.system('pause')
                 return category
         print("No se encontró el jugador en ninguna categoría.")
     os.system('cls')
     os.system('pause')
 
 def get_winners(torneo: dict) -> dict:
+    ganadores = {}
     for categoria, infoCat in torneo.items():
-        ganador = max(infoCat["jugadores"], key=points_in_favor)
-        print(f"Ganador en la categoría {categoria}: {ganador['nombre']} con {ganador['PA']} puntos a favor.")
+        if infoCat["jugadores"]:
+            ganador = max(infoCat["jugadores"], key=points_in_favor)
+            ganadores[categoria] = {
+                "nombre": ganador["nombre"],
+                "puntos_a_favor": ganador["PA"]
+            }
+            print(f"Ganador en la categoría {categoria}: {ganador['nombre']} con {ganador['PA']} puntos a favor.")
+        else:
+            ganadores[categoria] = None
+            print(f"No hay jugadores registrados en la categoría {categoria}.")
+    os.system('pause')
+    return ganadores

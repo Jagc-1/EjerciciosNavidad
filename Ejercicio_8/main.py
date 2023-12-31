@@ -14,11 +14,11 @@ while True:
     else:
         if opMenu == 1:
             os.system("cls")
-            tn.register_player()
-        elif opMenu == 2:
-            tn.start_tournament()
+            participants = tn.register_player()
+        elif opMenu ==2:
+            tn.registrer_points(participants)
         elif opMenu == 3:
-            tn.get_winners()
+            tn.get_winners(participants)
         elif opMenu == 4:
             print("¡Hasta luego!. Gracias Por Visitarnos")
             break
