@@ -18,8 +18,10 @@ while True:
         elif opMenu ==2:
             tn.registrer_points(participants)
         elif opMenu == 3:
-            tn.get_winners(participants)
+            tn.view_statistics(participants)
         elif opMenu == 4:
+            tn.get_winners(participants)
+        elif opMenu == 5:
             print("¡Hasta luego!. Gracias Por Visitarnos")
             break
         else:
