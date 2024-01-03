@@ -1,4 +1,4 @@
-menu = "1. Registrar nuevo camper\n2. Actualizar información del camper\n3. Registro de prueba\n10. Salir\n"
+menu = "1. Registrar nuevo camper\n2. Actualizar información del camper\n3. Registro de prueba\n4. Gestor de matricula\n10. Salir\n"
 
 def menuPrincipal() -> int:
     header = """
