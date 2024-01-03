@@ -6,7 +6,16 @@ training_routes = {
     'Programación Web (HTML, CSS y Bootstrap)': [],
     'Programación formal (Java, JavaScript, C#)' : [],
     'Bases de datos (Mysql, MongoDb y Postgresql).': [],
-    'Backend (NetCore, Spring Boot, NodeJS y Express)': []
+    'Backend (NetCore, Spring Boot, NodeJS y Express)': [],
+    'trainings':{
+        'training_A': 0;
+        'training_B': 0;
+        'training_C': 0;
+    },
+    'horarios': {
+        'mañana': 0,
+        'tarde': 0,
+    }
 }
 
 #function add_camper is for register each camper
@@ -99,7 +108,24 @@ def Registration_of_training_areas(route_number):
             break
     os.system('pause')
 
+#Function to choose at which time and which trainer to select
+def schedule():
+    id_number = input("Ingrese el número de identificación: ")
+    trainer = str(input("Escoja un trainer [A - B - C]: ")).lower()
+    horario = str(input("Escoja un horario [mañana - tarde]: ")).lower()
 
+    for camper in campers:
+        if camper['id_number'] == id_number and camper['estado'] == 'aprobado' and camper['ruta_entrenamiento'] is not None:
+            camper['training_routes'][''] = trainer
+            camper['training_routes']['horarios'] = horario
+            print(f'Se ha programado al camper con ID {id_number} en el horario {horario} con el trainer {trainer}.')
+            print('Diccionario actualizado:', campers)
+            break
+    else:
+        print('No se encontró el camper.')
+
+# Llama a la función para probarla
+schedule()
 
 
 # 7. CampusLands cuenta con Entrenadores expertos encargados de dirigir cada una de las rutas de entrenamiento.
