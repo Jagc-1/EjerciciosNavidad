@@ -51,7 +51,6 @@ def add_camper():
         }
     }
     campers.append(camper_info)
-    print(trainers)
     return campers
 
 def get_camper():
