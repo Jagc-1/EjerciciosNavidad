@@ -5,7 +5,7 @@ def menuPrincipal() -> int:
 
     header = """
     ***********************************
-    * Sistema de Gestión de Productos *
+    * Bienvenidos Al Torneo De Tenis *
     ***********************************
     """
     print(header)

@@ -13,7 +13,7 @@ while True:
          input("Presione Enter para continuar...")
     else:
         if opMenu == 1:
-            os.system("cls")
+            limpiar_pantalla()
             participants = tn.register_player()
         elif opMenu ==2:
             tn.registrer_points(participants)

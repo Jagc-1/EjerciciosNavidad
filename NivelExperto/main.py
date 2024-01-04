@@ -1,6 +1,8 @@
 import os
 import menu
 import registro as rg
+import matriculas as mat
+
 limpiar_pantalla = lambda : os.system("cls")
 opMenu = 0
 info = ''
@@ -16,12 +18,11 @@ while True:
     else:
         if opMenu == 1:
             rg.add_camper()
-            os.system("pause")
-        elif opMenu == 3:
+        elif opMenu == 2:
             rg.get_camper()
-            os.system("pause")
-        elif opMenu == 4:
-            rg.Registration_of_training_areas()
+        elif opMenu == 3:
+            # mat.registration_manager()
+            mat.registration_of_training_areas()
         elif opMenu == 10:
             print("¡Hasta luego!. Gracias Por Visitarnos")
             break
