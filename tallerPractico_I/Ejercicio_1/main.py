@@ -10,7 +10,7 @@ for i in range(3):
         try:
             numero = int(input(f"Ingrese el {i + 1} número: "))
             print("-----------------")
-            break  # Sale del bucle si la conversión a entero es exitosa
+            break 
         except ValueError:
             print("El número tiene que ser entero")
 
@@ -20,7 +20,7 @@ for i in range(3):
             try:
                 numero = int(input(f"Ingrese el {i + 1} número: "))
                 print("-----------------")
-                break  # Sale del bucle si la conversión a entero es exitosa
+                break 
             except ValueError:
                 print("El número tiene que ser entero")
 
