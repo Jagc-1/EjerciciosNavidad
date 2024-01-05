@@ -46,7 +46,6 @@ for i in range(1, 21):
     }
 
     estudiantes.append(est)
-
     imc = peso / altura ** 2
 
 if imc > 18.5 and imc < 24.9:
