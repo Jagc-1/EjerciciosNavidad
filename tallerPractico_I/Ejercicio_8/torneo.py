@@ -1,22 +1,23 @@
 import os
+#Function to obtain the number of points in favor of the player
 def points_in_favor(player):
     return player.get("PA")
 
+#Function por registrer  the player
 def register_player():
-    total_players = 0
-
     players_by_categories = {
-        "Novato": {"jugadores": [], "min_edad": 15, "max_edad": 16},
-        "Intermedio": {"jugadores": [], "min_edad": 17, "max_edad": 20},
-        "Avanzado": {"jugadores": [], "min_edad": 21, "max_edad": 99}
+        "Novato": {"jugadores": [], "min_edad": 15, "max_edad": 16, "registrados": 0},
+        "Intermedio": {"jugadores": [], "min_edad": 17, "max_edad": 20, "registrados": 0},
+        "Avanzado": {"jugadores": [], "min_edad": 21, "max_edad": 99, "registrados": 0}
     }
 
-    for categorie, info in players_by_categories.items():
+    for category, info in players_by_categories.items():
         print("-----------------------------------------")
-        print(f"INSCRIPCION DE LOS JUGADORES PARA LA CATEGORIA {categorie}:")
+        print(f"INSCRIPCION DE LOS JUGADORES PARA LA CATEGORIA {category}:")
         print("------ Registre 5 Jugadores Para Esta Categoria ------")
         print("-----------------------------------------")
-        while len(info["jugadores"]) < 5 and total_players :
+        
+        while info["registrados"] < 5:
             name = input("Nombre del jugador o S para finalizar: ").strip()
             if name.lower() == 's':
                 break
@@ -28,48 +29,60 @@ def register_player():
                 continue
 
             if info["min_edad"] <= age <= info["max_edad"]:
-                player = {"nombre": name, "edad": age, "ID": player_id, "PJ": 0, "PG": 0, "PP": 0, "PA": 0,'TP':0}
+                player = {"nombre": name, "edad": age, "ID": player_id, "PJ": 0, "PG": 0, "PP": 0, "PA": 0, 'TP': 0}
                 info["jugadores"].append(player)
-                total_players += 1
-                print(f"{name} registrado exitosamente.")
+                info["registrados"] += 1
+                print(f"{name} registrado exitosamente para la categoría {category}.")
                 print("----------------------------------------")
             else:
-                print(f"Lo siento, el jugador debe tener entre {info['min_edad']} y {info['max_edad']} años para la categoría {categorie}.")
+                print(f"Lo siento, el jugador debe tener entre {info['min_edad']} y {info['max_edad']} años para la categoría {category}.")
                 print("----------------------------------------")
 
-        if total_players < 4:
+        if info["registrados"] < 5:
             print("--------------------------------------------------------------------------")
-            print(f"No hay suficientes jugadores en la categoría {categorie} para iniciar el torneo.🏓")
-            os.system('pause')
-            os.system('cls')
-
+            print(f"No hay suficientes jugadores en la categoría {category} para iniciar el torneo.🏓")
+            input("Presiona Enter para continuar...")
     os.system('cls')
-    os.system('pause')
     return players_by_categories
 
+#Function por registrer points of the player
 def registrer_points(players_by_categories: dict) -> dict:
     name_player = input("Ingrese nombre del jugador: ")
     os.system('pause')
+
     for category, info in players_by_categories.items():
         for player in info["jugadores"]:
             if name_player == player["nombre"]:
                 os.system('cls')
                 print("El jugador está registrado en la categoría:", category)
+                
                 while True:
                     try:
-                        win = input("¿El jugador ganó el partido? (S/N): ").lower()        
-                        if win == 's':
-                            player["PG"] += 1        
-                            player["PJ"] += 1        
-                            points = int(input("Ingrese la cantidad de puntos a favor del jugador: "))        
-                            player["PA"] += points
-                        else:        
-                            player["PP"] += 1
-                            player["PJ"] += 1
-                        player["TP"] +=   player["PG"] * 2
+                        points_for = int(input("Ingrese la cantidad de puntos a favor del jugador: "))        
+                        points_against = int(input("Ingrese la cantidad de puntos en contra del jugador: "))
+
+                        player["PG"] += 1        
+                        player["PJ"] += 1        
+                        player["PA"] += points_for
+                        player["PP"] += points_against
+                        player["TP"] += player["PG"] * 2
+
+                        # Calcular puntos a favor restando los puntos en contra
+                        points_diff = points_for - points_against
+                        player["PF"] += points_diff
+
+                        # Determinar al ganador
+                        if points_diff > 0:
+                            print("¡El jugador es el ganador!")
+                        elif points_diff < 0:
+                            print("El jugador perdió.")
+                        else:
+                            print("El partido terminó en empate.")
+                            
                         break
                     except ValueError:
                         print("Por favor, ingrese datos válidos.")
+                
                 print("Puntos actualizados:")
                 print(player)
                 os.system('pause')
@@ -77,7 +90,8 @@ def registrer_points(players_by_categories: dict) -> dict:
         print("No se encontró el jugador en ninguna categoría.")
     os.system('cls')
     os.system('pause')
-
+    
+#Function por see the statistics of the player
 def view_statistics(players_by_categories: dict) -> dict:
     name_player = str(input("Ingrese nombre del jugador: "))
     os.system('pause')
@@ -96,6 +110,7 @@ def view_statistics(players_by_categories: dict) -> dict:
     os.system('pause')
     return "Jugador no encontrado en ninguna categoría."
 
+#Function por see the winners of each category
 def get_winners(players_by_categories: dict) -> dict:
     ganadores = {}
     for categoria, infoCat in players_by_categories.items():
