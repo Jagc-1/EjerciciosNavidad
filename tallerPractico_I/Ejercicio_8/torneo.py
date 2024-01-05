@@ -66,7 +66,7 @@ def registrer_points(players_by_categories: dict) -> dict:
                         else:        
                             player["PP"] += 1
                             player["PJ"] += 1
-                        player["TP"] +=   player["PG"] + player["PG"] 
+                        player["TP"] +=   player["PG"] * 2
                         break
                     except ValueError:
                         print("Por favor, ingrese datos válidos.")
