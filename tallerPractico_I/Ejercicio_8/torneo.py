@@ -58,23 +58,23 @@ def registrer_points(players_by_categories: dict) -> dict:
                 
                 while True:
                     try:
-                        points_for = int(input("Ingrese la cantidad de puntos a favor del jugador: "))        
-                        points_against = int(input("Ingrese la cantidad de puntos en contra del jugador: "))
-
-                        player["PG"] += 1        
-                        player["PJ"] += 1        
+                        points_for = int(input("Ingrese la cantidad de puntos del jugador: "))        
+                        points_against = int(input("Ingrese la cantidad de puntos del  otro jugador: "))
+    
                         player["PA"] += points_for
-                        player["PP"] += points_against
                         player["TP"] += player["PG"] * 2
 
-                        # Calcular puntos a favor restando los puntos en contra
                         points_diff = points_for - points_against
                         player["PF"] += points_diff
 
                         # Determinar al ganador
                         if points_diff > 0:
                             print("¡El jugador es el ganador!")
+                            player["PG"]+= 1        
+                            player["PJ"] += 1   
                         elif points_diff < 0:
+                            player["PJ"] += 1  
+                            player["PP"] += points_against
                             print("El jugador perdió.")
                         else:
                             print("El partido terminó en empate.")
