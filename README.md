@@ -1,6 +1,6 @@
 ### Ejercicios en Python
 
- Este repositorio contiene una serie de ejercicios resueltos en Python para practicar y mejorar tus habilidades de programación.
+ Este repositorio contiene una serie de ejercicios resueltos en Python para practicar y mejorar las habilidades de programación.
 
  #### Contenido
 
