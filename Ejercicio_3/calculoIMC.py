@@ -1,7 +1,7 @@
 import os
 estudiantes = []
 
-for i in range(1, 3):
+for i in range(1, 20):
     os.system("clear")  # Cambié "cls" por "clear" para sistemas Unix
     nombre = input(f"Ingrese el nombre del alumno #{i}: ").lower()
     while any(caracter.isdigit() for caracter in nombre):
@@ -18,19 +18,19 @@ for i in range(1, 3):
         continue
 
     try:
-        peso = float(input("Ingrese el peso del alumno en kilogramos (por ejemplo, 70.5): "))
+        peso = float(input("Ingrese el peso del alumno en kilogramos: "))
         while peso <= 0:
             print("El peso no puede ser negativo ni 0")
-            peso = float(input("Ingrese el peso del alumno en kilogramos (por ejemplo, 70.5): "))
+            peso = float(input("Ingrese el peso del alumno en kilogramos: "))
     except ValueError:
         print("Carácter inválido, solo se permiten valores numéricos")
         continue
 
     try:
-        altura = float(input("Ingrese la altura del alumno en metros (por ejemplo, 1.75): "))
+        altura = float(input("Ingrese la altura del alumno en metros: "))
         while altura <= 0:
             print("La altura no puede ser negativa ni 0")
-            altura = float(input("Ingrese la altura del alumno en metros (por ejemplo, 1.75): "))
+            altura = float(input("Ingrese la altura del alumno en metros: "))
     except ValueError:
         print("Carácter inválido, solo se permiten valores numéricos")
         continue

@@ -16,7 +16,7 @@ while True:
     elif opcion_menu == 4:
         mn.dependencia_mayor_co2()
     elif opcion_menu == 5:
-        print("Saliendo del programa...")
+        print("¡Hasta luego!. Gracias Por Visitarnos")
         break
     else:
         print("La opción ingresada no es válida.")

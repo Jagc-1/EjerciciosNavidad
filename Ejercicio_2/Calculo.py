@@ -1,7 +1,7 @@
 import os
 estudiantes = []
 
-for i in range(1, 3):
+for i in range(1, 5):
     os.system("cls")
     nombre = input(f"Ingrese el nombre del alumno #{i}: ").lower()
     while any(caracter.isdigit() for caracter in nombre):

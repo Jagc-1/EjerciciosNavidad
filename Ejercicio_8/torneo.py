@@ -44,6 +44,7 @@ def register_players():
     return players_by_categories
 
 # Función para registrar puntos de los jugadores
+# Función para registrar puntos de los jugadores
 def register_points(players_by_categories):
     for category, info in players_by_categories.items():
         os.system('cls')
@@ -60,31 +61,20 @@ def register_points(players_by_categories):
                 except ValueError:
                     print("Ingrese un valor correcto para el puntaje del contrincante.")
 
-            # Calcular la diferencia de puntos
-            score_difference = score_player - score_opponent
 
-            # Actualizar los puntos y partidos jugados para cada jugador
+            score_difference = score_player - score_opponent
             player["PJ"] += 1
 
             if score_difference > 0:
                 player["PG"] += 1
+                player["PA"] += score_difference
+                player["TP"] += 2
             elif score_difference < 0:
                 player["PP"] += 1
 
-            # Actualizar puntos a favor considerando la diferencia de puntos
-            player["PA"] += score_difference
-
-    for category, info in players_by_categories.items():
-        for player in info["jugadores"]:
-            if player["PG"] > 0:
-                player["TP"] = player["PJ"] * 2
-            if player["PA"] < 0:
-                player["PA"] = 0
-
-
     print("\nRegistro de resultados completado.")
-    os.system('pause')
     os.system('cls')
+    os.system('pause')
 
 
 # Función para ver las estadísticas de un jugador
@@ -98,7 +88,7 @@ def view_statistics(players_by_categories: dict) -> None:
                 os.system('cls')
                 print("El jugador está registrado en la categoría:", category)
                 print("ID\t\tNombre\t\tPJ\tPG\tPP\tPA\tTP")
-                print(f"{player['ID']}\t{player['nombre']}\t{player['PJ']}\t{player['PG']}\t{player['PP']}\t{player['PA']}\t{player['TP']}")
+                print(f"{player['ID']}\t\t{player['nombre']}\t\t{player['PJ']}\t{player['PG']}\t{player['PP']}\t{player['PA']}\t{player['TP']}")
                 os.system('pause')
                 return
 
@@ -108,16 +98,24 @@ def view_statistics(players_by_categories: dict) -> None:
 # Función para obtener los ganadores de cada categoría
 def get_winners(players_by_categories: dict) -> dict:
     ganadores = {}
+
     for categoria, infoCat in players_by_categories.items():
         if infoCat["jugadores"]:
-            ganador = max(infoCat["jugadores"], key=lambda player: player["PA"])
+            # Ordenar la lista de jugadores por TP y luego por PA en caso de empate
+            jugadores_ordenados = sorted(infoCat["jugadores"], key=lambda player: (player["TP"], player["PA"]), reverse=True)
+
+            # Toma al primer jugador de la lista ordenada como ganador
+            ganador = jugadores_ordenados[0]
+
             ganadores[categoria] = {
                 "nombre": ganador["nombre"],
                 "puntos_a_favor": ganador["PA"]
             }
-            print(f"Ganador en la categoría {categoria}: {ganador['nombre']} con {ganador['PA']} puntos a favor.")
+
+            print(f"Ganador en la categoría {categoria}: {ganador['nombre']} con {ganador['TP']} puntos totales y {ganador['PA']} puntos a favor.")
         else:
             ganadores[categoria] = None
             print(f"No hay jugadores registrados en la categoría {categoria}.")
+
     os.system('pause')
     return ganadores

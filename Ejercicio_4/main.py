@@ -1,3 +1,5 @@
+import os
+
 total_numeros = 0
 total_pares = 0
 suma_pares = 0
@@ -41,6 +43,7 @@ if total_numeros > 0:
     else:
         promedio_impares = 0
 
+    os.system('cls')
     print("-----------------------------------------------------")
     print("Total de números ingresados:", total_numeros)
     print("Total de números pares:", total_pares)
