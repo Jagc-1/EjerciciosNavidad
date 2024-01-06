@@ -46,7 +46,6 @@ for i in range(1, 3):
     }
 
     estudiantes.append(est)
-
     imc = peso / altura ** 2
 
 if imc > 18.5 and imc < 24.9:
@@ -67,6 +66,7 @@ for idx, estudiante in enumerate(estudiantes, start=1):
     for key, value in estudiante.items():
         print(f"{key}: {value}")
 
+<<<<<<< HEAD:tallerPractico/Ejercicio_2/Calculo.py
 # Pregunta al usuario si desea agregar más estudiantes
 rep = input("¿Desea agregar más estudiantes? S(si) N(no)").upper()
 while rep != "S" and rep != "N":
@@ -77,3 +77,19 @@ if rep == "S":
     isActive = True
 else:
     isActive = False
+=======
+        try:
+            rep = input("Desea agregar un estudiante? S(si) N(no)").upper()
+        except ValueError:
+            print("No se permiten numeros")
+            rep = input("Desea agregar un estudiante? S(si) N(no)").upper()
+            os.system("cls")
+        while rep != "S" and rep != "N":
+            print("Caracter Invalido!!")
+            rep = input("Desea agregar un estudiante? S(si) N(no)").upper()
+        if rep == "S":
+            isActive = True
+        else: 
+            isActive = False
+        
+>>>>>>> 84bb73546cf60bf6a12c29d9c70b974b34f25b69:tallerPractico_I/Ejercicio_3/calculoIMC.py

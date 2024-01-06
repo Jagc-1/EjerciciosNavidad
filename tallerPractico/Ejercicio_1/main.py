@@ -9,7 +9,11 @@ for i in range(3):
         try:
             numero = int(input(f"Ingrese el {i + 1} número: "))
             print("-----------------")
+<<<<<<< HEAD:tallerPractico/Ejercicio_1/main.py
             break
+=======
+            break 
+>>>>>>> 84bb73546cf60bf6a12c29d9c70b974b34f25b69:tallerPractico_I/Ejercicio_1/main.py
         except ValueError:
             print("El número tiene que ser entero")
 
@@ -19,7 +23,11 @@ for i in range(3):
             try:
                 numero = int(input(f"Ingrese el {i + 1} número: "))
                 print("-----------------")
+<<<<<<< HEAD:tallerPractico/Ejercicio_1/main.py
                 break
+=======
+                break 
+>>>>>>> 84bb73546cf60bf6a12c29d9c70b974b34f25b69:tallerPractico_I/Ejercicio_1/main.py
             except ValueError:
                 print("El número tiene que ser entero")
 
